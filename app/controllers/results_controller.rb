@@ -56,8 +56,10 @@ class ResultsController < ApplicationController
         found_category ||= Category.create(:name => category.text)
         @category_ids << found_category.id
       end
-    end
-    @events_in_category_raw = events_section.xpath('ul')
+      @events_in_category_raw = events_section.xpath('ul')
+    else
+      @events_in_category_raw = events_section.css('ul')
+    end 
   end
 
   def scrape_event_digest(event_link)
