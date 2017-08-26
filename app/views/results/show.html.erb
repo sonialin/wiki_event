@@ -1,3 +1,4 @@
+<h4><%= @result.events.count %> Events retrieved for <%= format_date(@result.queried_date) %></h4>
 <% if @result.events.empty? %>
   <p>There are no events found today.</p>
 <% else %>

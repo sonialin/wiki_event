@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
   def index
-    @results = Result.paginate(:page => params[:page], :per_page => 15)
+    @results = Result.order(created_at: :desc).paginate(:page => params[:page], :per_page => 15)
   end
 
   def new
@@ -64,7 +64,10 @@ class ResultsController < ApplicationController
     raw_content = HTTParty.get(event_link, :headers =>{'Content-Type' => 'application/json'})
     page = Nokogiri::HTML(raw_content)
     title = page.at('h1').text
-    summary = page.xpath('//div[@class="mw-parser-output"]/p[./following-sibling::div[@id="toc"] or following-sibling::div[starts-with(@class, "toc")]]').to_s
+    summary = page.xpath('//div[@class="mw-parser-output"]/p[./following-sibling::div[@id="toc"] ] ').to_s
+    if summary.empty?
+      summary = page.xpath('//div[@class="mw-parser-output"]/p[./following-sibling::div[starts-with(@class, "toc")]]').to_s
+    end
     if summary.empty?
       summary = 'n/a'
     end

@@ -6,7 +6,7 @@
       Queried Date of Wiki-events
     </th>
     <th>
-      Date the Query Was Made
+      Time the Query Was Made
     </th>
     <th>
       Number of Wiki-events Obtained
@@ -14,9 +14,9 @@
   </tr>
   <% @results.each do |result| %>
     <tr>
-      <td><%= result.queried_date %></td>
+      <td><%= format_date(result.queried_date) %></td>
       <td><%= result.created_at %></td>
-      <td><%= link_to result.events.count, result %></td>
+      <td><%= show_link_if_events_found(result) %></td>
     </tr>
   <% end %>
 </table>

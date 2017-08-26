@@ -1,4 +1,19 @@
-<%= form_for @result do |f| %>
+<div class="page-header">
+    <h1>WikiDigest <small>provides a short version of Wikipedia events for a given day</small></h1>
+  </div>
+
+  <dl>
+    <dt>The searchable date range is from 01/01/2000 till today.</dt>
+    <dd>The more recent, the more reliable. Wikipedia earlier than 2010 appears prone to inconsistent markup and missing dates in the event section.</dd>
+    <br />
+    <dt>Search on the same date will be cached locally.</dt>
+    <dd>An edit made on Wikipedia for an already searched date won't be reflected locally.</dd>
+    <br />
+    <dt>In the event that no events were obtained, or any parts of the events were missing for the day, the query is saved to indicate the attempted retrieval.</dt>
+    <dd>For example, event summary will be 'n/a', or no events will be saved if no events are retrived for the date.</dd>
+  </dl>
+
+  <%= form_for @result do |f| %>
   <p>
     <%= f.label :queried_date,'Query Date' %><br>
     <%= f.text_field :queried_date, id: 'pickDate' %>
@@ -8,6 +23,7 @@
     <%= f.submit "Search" %>
   </p>
 <% end %>
+</div>
 <script type="text/javascript">
   $(document).ready(function () {
     $('#pickDate').datepicker({
