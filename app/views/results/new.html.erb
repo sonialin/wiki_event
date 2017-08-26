@@ -1,0 +1,19 @@
+<%= form_for @result do |f| %>
+  <p>
+    <%= f.label :queried_date,'Query Date' %><br>
+    <%= f.text_field :queried_date, id: 'pickDate' %>
+  </p>
+ 
+  <p>
+    <%= f.submit "Search" %>
+  </p>
+<% end %>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#pickDate').datepicker({
+        format: "dd/mm/yyyy",
+        startDate: "1/1/2000",
+        endDate: '0d'
+    });
+  });
+</script>

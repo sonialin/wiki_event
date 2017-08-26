@@ -1,0 +1,24 @@
+<h1>Previous Queries</h1>
+
+<table class="table">
+  <tr>
+    <th>
+      Queried Date of Wiki-events
+    </th>
+    <th>
+      Date the Query Was Made
+    </th>
+    <th>
+      Number of Wiki-events Obtained
+    </th>
+  </tr>
+  <% @results.each do |result| %>
+    <tr>
+      <td><%= result.queried_date %></td>
+      <td><%= result.created_at %></td>
+      <td><%= link_to result.events.count, result %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @results %>

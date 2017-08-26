@@ -1,0 +1,26 @@
+<% if @result.events.empty? %>
+  <p>There are no events found today.</p>
+<% else %>
+  <% @result.events.each_with_index do |event, index| %>
+    <% if @result.events[index - 1] && @result.events[index - 1].category != event.category %>
+      <br />
+      <div class="row">
+        <h2><%= event.category.name %></h2>
+      </div>
+    <% end %>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>
+          <%= event.title %>
+          <% if event.image_link %>
+            <small>
+              <%= link_to event.image_link, "https://en.wikipedia.org" + event.image_link %>
+            </small>
+          <% end %>
+        </h4>
+      </div>
+      <div class="col-md-12"><% if event.summary %><%= event.summary.html_safe %><% end %></div>
+    </div>
+  <% end %>
+<% end %>
