@@ -1,24 +1,28 @@
 <h1>Previous Queries</h1>
 
-<table class="table">
-  <tr>
-    <th>
-      Queried Date of Wiki-events
-    </th>
-    <th>
-      Time the Query Was Made
-    </th>
-    <th>
-      Number of Wiki-events Obtained
-    </th>
-  </tr>
-  <% @results.each do |result| %>
+<% if @results.any? %>
+  <table class="table">
     <tr>
-      <td><%= format_date(result.queried_date) %></td>
-      <td><%= result.created_at %></td>
-      <td><%= show_link_if_events_found(result) %></td>
+      <th>
+        Queried Date of Wiki-events
+      </th>
+      <th>
+        Time the Query Was Made
+      </th>
+      <th>
+        Number of Wiki-events Obtained
+      </th>
     </tr>
-  <% end %>
-</table>
+    <% @results.each do |result| %>
+      <tr>
+        <td><%= format_date(result.queried_date) %></td>
+        <td><%= result.created_at %></td>
+        <td><%= show_link_if_events_found(result) %></td>
+      </tr>
+    <% end %>
+  </table>
 
-<%= will_paginate @results %>
+  <%= will_paginate @results %>
+<% else %>
+  <p>No searches have been made yet.</p>
+<% end %>
